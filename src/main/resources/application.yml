@@ -1,0 +1,62 @@
+server:
+  port: 8080
+
+logging:
+  file: log/ams-eventhub.log
+  pattern:
+    console: "%d{EEE MMM dd HH:mm:ss:SSS z yyyy} [%thread] %-5level %logger{36} - %msg%n"
+    file: "%d{EEE MMM dd HH:mm:ss:SSS z yyyy} [%thread] %-5level %logger{36} - %msg%n"
+  level:
+    com.ayla: DEBUG
+    org.apache: INFO
+    org.springframework: INFO
+    com.azure.core: DEBUG
+
+ams-stream:
+  db:
+    call-interval: 30000
+  eventhub:
+    thread-pool-size: 1
+
+kafka:
+  eventhub:
+    bootstrapAddress: localhost:9092
+    enable.auto.commit: true
+    session.timeout: 20000
+    auto.commit.interval: 100
+    auto.offset.reset: earliest
+    group.id: message-service-test-group
+    concurrency: 10
+    maxPollRecordsConfig: 50
+    corepoolsize: 64
+    maxpoolsize: 128
+    queuecapacity: 128
+    topic: eventhub-main
+
+  producer:
+    bootstrapAddress: localhost:9092
+    retries: 1
+    batch.size: 4096
+    linger: 1
+    buffer.memory: 40960
+    acks: 1
+
+
+eventhub:
+  namespacename: "***"
+  eventhubname: "***8"
+  saskeyname: "****"
+  saskey: "****"
+
+
+management:
+  security:
+  endpoint:
+    health:
+      enabled: true
+      show-details: "always"
+    web:
+      exposure:
+        include: "*"
+
+
